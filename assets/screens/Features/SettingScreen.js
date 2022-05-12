@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Switch} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import HeaderSetting from '../Header/HeaderSetting';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const SettingScreen = () => {
   const navigation = useNavigation();
   const [isEnabled, setIsEnabled] = useState(false);
@@ -12,6 +13,10 @@ const SettingScreen = () => {
   const [isEnabled2, setIsEnabled2] = useState(false);
   const switchToggle2 = () => {
     setIsEnabled2(isEnabled2 => !isEnabled2);
+  };
+  const logout = async () => {
+    await AsyncStorage.clear();
+    navigation.navigate('Login');
   };
   return (
     <View style={styles.page}>
@@ -64,7 +69,7 @@ const SettingScreen = () => {
           />
         </View>
 
-        <TouchableOpacity style={styles.buttonSignOut}>
+        <TouchableOpacity style={styles.buttonSignOut} onPress={logout}>
           <Text style={styles.textSignOut}>SIGN OUT</Text>
         </TouchableOpacity>
       </View>

@@ -28,14 +28,14 @@ const SignUp = ({navigation}) => {
   const buttonDaftar = () => {
     if (namaUser && emailUser && password && noHp) {
       const data = {
-        namaUser: namaUser,
-        emailUser: emailUser,
-        passwordUser: password,
-        nohpUser: noHp,
+        nama_user: namaUser,
+        email: emailUser,
+        password: password,
+        alamat: noHp,
       };
-      Axios.post('http://10.0.2.2:3000/users', data)
+      Axios.post('http://10.0.2.2:1234/api/register', data)
         .then(res => {
-          console.log('res', res);
+          console.log('res', res.data);
           setNamaUser('');
           setEmailUser('');
           setPassword('');

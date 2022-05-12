@@ -7,15 +7,15 @@ import TrashgoIcon from '../img/trashgoicon.svg';
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
-      AsyncStorage.getItem('emailUser')
-        .then(value => {
-          value == !null
-            ? navigation.dispatch(StackActions.replace('Home'))
-            : navigation.dispatch(StackActions.replace('Login'));
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      try {
+        const _validationSession = async () => {
+          const isLogin = await AsyncStorage.getItem('sessionID');
+          navigation.navigate(isLogin ? 'Tabs' : 'Login');
+        };
+        _validationSession();
+      } catch (error) {
+        console.log(error);
+      }
     }, 2500);
   }, []);
 

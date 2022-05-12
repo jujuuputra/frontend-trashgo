@@ -19,6 +19,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Axios from 'axios';
 // Import Image
 import SampahImg from '../img/trashgoicon.svg';
 import IconGoogle from '../img/icon-google.svg';
@@ -28,27 +29,48 @@ const Stack = createNativeStackNavigator();
 
 const Login = ({navigation}) => {
   const [emailUser, setEmailUser] = useState('');
-  const [passwordUser, setSandiUser] = useState('');
+  const [passwordUser, setPasswordUser] = useState('');
+  const [token, setToken] = useState('');
   const LoginHandle = () => {
-    if (!emailUser) {
-      ToastAndroid.show('Silahkan isi email dengan benar!', ToastAndroid.SHORT);
-      return;
-    }
-    if (!passwordUser) {
-      ToastAndroid.show(
-        'Silahkan isi password dengan benar!',
-        ToastAndroid.SHORT,
-      );
-      return;
-    }
-    // setLoading(true)
+    try {
+      if (!emailUser) {
+        ToastAndroid.show(
+          'Silahkan isi email dengan benar!',
+          ToastAndroid.SHORT,
+        );
+        return;
+      }
+      if (!passwordUser) {
+        ToastAndroid.show(
+          'Silahkan isi password dengan benar!',
+          ToastAndroid.SHORT,
+        );
+        return;
+      }
+      // setLoading(true)
 
-    //API
-    AsyncStorage.setItem('emailUser', emailUser);
-    AsyncStorage.setItem('passwordUser', passwordUser);
-    navigation.replace('Tabs');
+      //API
+      Axios.post('https://reqres.in/api/login', {
+        email: emailUser,
+        password: passwordUser,
+      })
+        .then(response => {
+          console.log(response.data);
+          if (!emailUser && !passwordUser) {
+            Alert.alert('Warning', 'Email atau password tidak cocok!');
+          }
+          AsyncStorage.setItem('sessionID', 'sessionID' + Math.random());
+          navigation.replace('Tabs');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
     //END API
   };
+
   //Back Handler
 
   useEffect(() => {
@@ -98,14 +120,14 @@ const Login = ({navigation}) => {
           value={emailUser}
           style={styles.formInput}
           placeholder="Alamat Email"
-          onChangeText={emailUser => setEmailUser(emailUser)}
+          onChangeText={value => setEmailUser(value)}
           keyboardType={'email-address'}></TextInput>
         <Text style={styles.textInput}>Kata Sandi</Text>
         <TextInput
           value={passwordUser}
           style={styles.formInput}
           placeholder="Kata Sandi"
-          onChangeText={passwordUser => setSandiUser(passwordUser)}
+          onChangeText={value => setPasswordUser(value)}
           secureTextEntry={true}></TextInput>
         <TouchableOpacity
           onPress={() => navigation.navigate('ForgetPassword')}

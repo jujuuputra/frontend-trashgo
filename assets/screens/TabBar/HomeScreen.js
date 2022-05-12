@@ -16,6 +16,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Appbar, IconButton, BottomNavigation, Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import MapView from 'react-native-maps';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Screen
 import AppHeader from '../Header/AppHeader';
