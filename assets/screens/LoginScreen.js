@@ -31,45 +31,62 @@ const Login = ({navigation}) => {
   const [emailUser, setEmailUser] = useState('');
   const [passwordUser, setPasswordUser] = useState('');
   const [token, setToken] = useState('');
-  const LoginHandle = () => {
-    try {
-      if (!emailUser) {
-        ToastAndroid.show(
-          'Silahkan isi email dengan benar!',
-          ToastAndroid.SHORT,
-        );
-        return;
-      }
-      if (!passwordUser) {
-        ToastAndroid.show(
-          'Silahkan isi password dengan benar!',
-          ToastAndroid.SHORT,
-        );
-        return;
-      }
-      // setLoading(true)
 
-      //API
-      Axios.post('https://reqres.in/api/login', {
-        email: emailUser,
-        password: passwordUser,
+  function LoginHandle() {
+    Axios.post('https://reqres.in/api/login', {
+      email: emailUser,
+      password: passwordUser,
+    })
+      .then(response => {
+        console.log('success');
+        console.log(response);
+        AsyncStorage.setItem('sessionID', response.data.token);
+        navigation.navigate('Tabs');
       })
-        .then(response => {
-          console.log(response.data);
-          if (!emailUser && !passwordUser) {
-            Alert.alert('Warning', 'Email atau password tidak cocok!');
-          }
-          AsyncStorage.setItem('sessionID', 'sessionID' + Math.random());
-          navigation.replace('Tabs');
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-    //END API
-  };
+      .catch(error => {
+        console.log(error);
+        Alert.alert('Warning', 'Email atau password tidak cocok!');
+      });
+  }
+
+  // const LoginHandle = () => {
+  //   try {
+  //     if (!emailUser) {
+  //       ToastAndroid.show(
+  //         'Silahkan isi email dengan benar!',
+  //         ToastAndroid.SHORT,
+  //       );
+  //       return;
+  //     }
+  //     if (!passwordUser) {
+  //       ToastAndroid.show(
+  //         'Silahkan isi password dengan benar!',
+  //         ToastAndroid.SHORT,
+  //       );
+  //       return;
+  //     }
+  //     // setLoading(true)
+
+  //     //API
+  //     Axios.post('https://reqres.in/api/login', {
+  //       email: emailUser,
+  //       password: passwordUser,
+  //     })
+  //       .then(response => {
+  //         console.log(response.data);
+  //         if (!emailUser && !passwordUser) {
+  //           Alert.alert('Warning', 'Email atau password tidak cocok!');
+  //         }
+  //         AsyncStorage.setItem('sessionID', 'sessionID' + Math.random());
+  //         navigation.replace('Tabs');
+  //       })
+  //       .catch(error => {
+  //         console.log(error);
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //END API
 
   //Back Handler
 
