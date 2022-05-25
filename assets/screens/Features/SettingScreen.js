@@ -14,10 +14,12 @@ const SettingScreen = () => {
   const switchToggle2 = () => {
     setIsEnabled2(isEnabled2 => !isEnabled2);
   };
+
   const logout = async () => {
-    await AsyncStorage.clear();
+    await AsyncStorage.removeItem('sessionID');
     navigation.navigate('Login');
   };
+
   return (
     <View style={styles.page}>
       <HeaderSetting />

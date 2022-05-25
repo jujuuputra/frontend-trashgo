@@ -1,17 +1,76 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
+  Image,
+  PermissionsAndroid,
+  ToastAndroid,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/SimpleLineIcons';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+
 //Screen
 import HeaderCamera from '../Header/HeaderCamera';
 import bgTrashGO from '../../img/trashgoicon.svg';
+
 const Camera = () => {
+  const [imageCamera, setImageCamera] = useState(null);
+  const [accessCamera, setAccessCamera] = useState(null);
+
+  const requestCameraPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: 'App Camera Permission',
+          message: 'App needs access to your camera ',
+          buttonNeutral: 'Nanti',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('Camera permission given');
+        return setAccessCamera(1);
+      } else {
+        console.log('Camera permission denied');
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
+  const openCamera = () => {
+    const option = {
+      mediaType: 'photo',
+      quality: 1,
+    };
+    launchCamera(option, res => {
+      if (res.didCancel) {
+        console.log('User Canceled');
+      } else if (res.errorMessage) {
+        console.log(res.errorMessage);
+      } else {
+        const data = res.assets[0];
+        setImageCamera(data);
+        console.log(data);
+      }
+    });
+  };
+
+  function removeImage() {
+    setImageCamera(null);
+  }
+
+  const buttonKirim = () => {
+    setImageCamera(null);
+    ToastAndroid.show('Laporan telah terkirim', ToastAndroid.SHORT);
+  };
+
   return (
     <View style={styles.Page}>
       <HeaderCamera></HeaderCamera>
@@ -36,25 +95,48 @@ const Camera = () => {
           </Text>
         </View>
         <View style={styles.ContCam}>
-          <Text style={styles.textLaporkan}>Tangkap Foto</Text>
-          <TouchableOpacity style={styles.camera} onPress={() => {}}>
-            <Icon name="camera-alt" color={'#fff'} size={120}></Icon>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.ContKirim} onPress={() => {}}>
+          {imageCamera != null ? (
+            <Image
+              source={{uri: imageCamera.uri}}
+              style={{height: 200, width: 200}}
+            />
+          ) : (
             <View>
-              <Icon2 name="camera" color={'#fff'} size={25}></Icon2>
+              <Text style={styles.textLaporkan}>Tangkap Foto</Text>
+              <TouchableOpacity style={styles.camera} onPress={() => {}}>
+                <Icon name="camera-alt" color={'#fff'} size={120}></Icon>
+              </TouchableOpacity>
             </View>
-            <View style={styles.ContKirim2}>
-              <Text style={styles.textKirim}>Buka Kamera</Text>
-            </View>
-          </TouchableOpacity>
+          )}
 
-          <TouchableOpacity style={styles.ContKirim3}>
-            <Text style={styles.textKirim2}>Kirim Laporan</Text>
-          </TouchableOpacity>
+          {imageCamera != null ? (
+            <TouchableOpacity style={styles.ContKirim} onPress={removeImage}>
+              <View style={styles.ContKirim2}>
+                <Text style={styles.textKirim}>Hapus Gambar</Text>
+              </View>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styles.ContKirim}
+              onPress={
+                accessCamera != null ? openCamera : requestCameraPermission
+              }>
+              <View>
+                <Icon2 name="camera" color={'#fff'} size={25}></Icon2>
+              </View>
+              <View style={styles.ContKirim2}>
+                <Text style={styles.textKirim}>Buka Kamera</Text>
+              </View>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
+
+      {imageCamera != null ? (
+        <TouchableOpacity style={styles.ContKirim3} onPress={buttonKirim}>
+          <Text style={styles.textKirim2}>Kirim Laporan</Text>
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 };
@@ -88,6 +170,7 @@ const styles = StyleSheet.create({
   textLaporkan: {
     fontFamily: 'Poppins-SemiBold',
     color: '#105263',
+    textAlign: 'center',
   },
   textIsiLaporkan: {
     fontFamily: 'Poppins-Regular',
@@ -113,7 +196,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
+    marginTop: 10,
     borderRadius: 8,
     paddingHorizontal: 10,
   },
@@ -121,6 +204,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Poppins-SemiBold',
     fontSize: 12,
+    textAlign: 'center',
   },
   ContKirim2: {
     flex: 1,
@@ -134,7 +218,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    marginTop: 60,
+    position: 'absolute',
+    bottom: 100,
+    right: 30,
+    left: 30,
   },
   textKirim2: {
     color: '#105263',

@@ -14,6 +14,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -30,62 +31,26 @@ const Stack = createNativeStackNavigator();
 const Login = ({navigation}) => {
   const [emailUser, setEmailUser] = useState('');
   const [passwordUser, setPasswordUser] = useState('');
-  const [token, setToken] = useState('');
+  const [handleError, setHandleError] = useState(false);
 
   function LoginHandle() {
-    Axios.post('https://reqres.in/api/login', {
+    setHandleError(false);
+    Axios.post('http://10.0.2.2:1234/login', {
       email: emailUser,
       password: passwordUser,
     })
-      .then(response => {
-        console.log('success');
-        console.log(response);
-        AsyncStorage.setItem('sessionID', response.data.token);
+      .then(res => {
+        console.log(res);
+        AsyncStorage.setItem('sessionID', res.data.token);
         navigation.navigate('Tabs');
+        setEmailUser('');
+        setPasswordUser('');
       })
       .catch(error => {
         console.log(error);
-        Alert.alert('Warning', 'Email atau password tidak cocok!');
+        setHandleError(true);
       });
   }
-
-  // const LoginHandle = () => {
-  //   try {
-  //     if (!emailUser) {
-  //       ToastAndroid.show(
-  //         'Silahkan isi email dengan benar!',
-  //         ToastAndroid.SHORT,
-  //       );
-  //       return;
-  //     }
-  //     if (!passwordUser) {
-  //       ToastAndroid.show(
-  //         'Silahkan isi password dengan benar!',
-  //         ToastAndroid.SHORT,
-  //       );
-  //       return;
-  //     }
-  //     // setLoading(true)
-
-  //     //API
-  //     Axios.post('https://reqres.in/api/login', {
-  //       email: emailUser,
-  //       password: passwordUser,
-  //     })
-  //       .then(response => {
-  //         console.log(response.data);
-  //         if (!emailUser && !passwordUser) {
-  //           Alert.alert('Warning', 'Email atau password tidak cocok!');
-  //         }
-  //         AsyncStorage.setItem('sessionID', 'sessionID' + Math.random());
-  //         navigation.replace('Tabs');
-  //       })
-  //       .catch(error => {
-  //         console.log(error);
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
   //END API
 
   //Back Handler
@@ -154,11 +119,15 @@ const Login = ({navigation}) => {
       </View>
 
       {/* Button Masuk Dll */}
+
       <View style={styles.containerLupa}>
+        {handleError ? (
+          <Text style={styles.handleError}>Email atau password salah</Text>
+        ) : null}
         <TouchableOpacity style={styles.buttonMasuk} onPress={LoginHandle}>
           <Text style={styles.textMasuk}>Masuk</Text>
         </TouchableOpacity>
-        <View style={styles.containerMasukDengan}>
+        {/* <View style={styles.containerMasukDengan}>
           <Text style={styles.textMasukDengan}>Atau Masuk dengan</Text>
         </View>
         <View style={styles.containerIcon}>
@@ -168,7 +137,7 @@ const Login = ({navigation}) => {
           <TouchableOpacity style={styles.iconLogin}>
             <IconFb height={27} width={27}></IconFb>
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View style={styles.containerDaftar}>
           <Text style={styles.textBelum}>Belum memiliki akun?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
@@ -188,12 +157,12 @@ const Login = ({navigation}) => {
 const styles = StyleSheet.create({
   version: {
     bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginTop: 40,
   },
   textVersion: {
     color: 'gray',
     fontFamily: 'Poppins-Regular',
+    textAlign: 'center',
   },
   textBelum: {
     fontFamily: 'Poppins-Regular',
@@ -301,6 +270,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
     fontSize: 12,
     marginHorizontal: 40,
+  },
+  handleError: {
+    color: 'red',
+    marginLeft: 40,
   },
 });
 

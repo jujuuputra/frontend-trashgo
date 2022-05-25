@@ -6,80 +6,109 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  FlatList,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 //Screen
 import HeaderHistory from './Header/HeaderHistory';
 
 const HistoryScreen = ({navigation}) => {
-  const [date, setDate] = useState({
-    tanggal: '24',
-    bulan: 'Februari',
-  });
+  const data = [
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      status: 'Selesai',
+      title: 'Pelaporan Sampah 24 Februari',
+      desc: 'Laporan Anda diterima.',
+    },
+    {
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      status: 'Gagal',
+      title: 'Pelaporan Sampah 27 Februari',
+      desc: 'Laporan Anda ditolak.',
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      status: 'Menunggu persetujuan',
+      title: 'Pelaporan Sampah 29 Februari',
+      desc: 'Terimakasih telah melaporkan tempat sampah yang sudah penuh.',
+    },
+  ];
+
+  const statusLaporan = value => {
+    if (value == 'Selesai') {
+      return 1;
+    }
+
+    if (value == 'Gagal') {
+      return 2;
+    }
+
+    if (value == 'Menunggu persetujuan') {
+      return 3;
+    }
+  };
 
   return (
     <View>
       <View>
         <HeaderHistory />
       </View>
-      <View style={styles.ContPage}>
-        <View style={styles.ContBox}>
-          <View style={styles.ContIsiBox1}>
-            <View style={styles.ContStatus1}>
-              <Text style={[styles.text1, {color: '#D2AE2C'}]}>
-                Menunggu persetujuan
-              </Text>
+
+      <FlatList
+        data={data}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => {
+          return (
+            <View style={styles.ContPage}>
+              <View style={styles.ContBox}>
+                <View style={styles.ContIsiBox1}>
+                  <View
+                    style={[
+                      statusLaporan(item.status) == 1
+                        ? styles.berhasilBcc
+                        : styles.ContStatus1,
+                      statusLaporan(item.status) == 2
+                        ? styles.gagalBcc
+                        : styles.ContStatus1,
+                      statusLaporan(item.status) == 3
+                        ? styles.waitBcc
+                        : styles.ContStatus1,
+                      styles.ContStatus1,
+                    ]}>
+                    <Text
+                      style={[
+                        statusLaporan(item.status) == 1
+                          ? styles.berhasilBcc
+                          : styles.text1,
+                        statusLaporan(item.status) == 2
+                          ? styles.gagalBcc
+                          : styles.text1,
+                        statusLaporan(item.status) == 3
+                          ? styles.waitBcc
+                          : styles.text1,
+                        styles.text1,
+                      ]}>
+                      {item.status}
+                    </Text>
+                  </View>
+                  <Text style={styles.text2}>{item.title}</Text>
+                  <View style={styles.ContTextKet}>
+                    <Text
+                      numberOfLines={2}
+                      ellipsizeMode="tail"
+                      style={styles.text3}>
+                      {item.desc}
+                    </Text>
+                  </View>
+                </View>
+                <TouchableOpacity style={styles.ContIsiBox2} onPress={() => {}}>
+                  <Icon name="arrow-forward-ios" size={25}></Icon>
+                </TouchableOpacity>
+              </View>
             </View>
-            <Text style={styles.text2}>
-              Pelaporan Sampah {date.tanggal} {date.bulan}
-            </Text>
-            <View style={styles.ContTextKet}>
-              <Text numberOfLines={2} ellipsizeMode="tail" style={styles.text3}>
-                Terimakasih telah melaporkan tempat sampah yang sudah penuh.
-              </Text>
-            </View>
-          </View>
-          <TouchableOpacity style={styles.ContIsiBox2} onPress={() => {}}>
-            <Icon name="arrow-forward-ios" size={25}></Icon>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.ContBox}>
-          <View style={styles.ContIsiBox1}>
-            <View style={styles.ContStatus2}>
-              <Text style={[styles.text1, {color: '#027915'}]}>Berhasil</Text>
-            </View>
-            <Text style={styles.text2}>
-              Pelaporan Sampah {date.tanggal} {date.bulan}
-            </Text>
-            <View style={styles.ContTextKet}>
-              <Text numberOfLines={2} ellipsizeMode="tail" style={styles.text3}>
-                Laporan Anda telah kami terima.
-              </Text>
-            </View>
-          </View>
-          <TouchableOpacity style={styles.ContIsiBox2} onPress={() => {}}>
-            <Icon name="arrow-forward-ios" size={25}></Icon>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.ContBox}>
-          <View style={styles.ContIsiBox1}>
-            <View style={styles.ContStatus3}>
-              <Text style={[styles.text1, {color: '#D40808'}]}>Gagal</Text>
-            </View>
-            <Text style={styles.text2}>
-              Pelaporan Sampah {date.tanggal} {date.bulan}
-            </Text>
-            <View style={styles.ContTextKet}>
-              <Text numberOfLines={2} ellipsizeMode="tail" style={styles.text3}>
-                Laporan Anda tidak diterima.
-              </Text>
-            </View>
-          </View>
-          <TouchableOpacity style={styles.ContIsiBox2} onPress={() => {}}>
-            <Icon name="arrow-forward-ios" size={25}></Icon>
-          </TouchableOpacity>
-        </View>
-      </View>
+          );
+        }}
+      />
     </View>
   );
 };
@@ -106,7 +135,7 @@ const styles = StyleSheet.create({
   },
   text1: {
     fontFamily: 'Poppins-Medium',
-    fontSize: 8,
+    fontSize: 9,
   },
   text2: {
     fontFamily: 'Poppins-Bold',
@@ -119,25 +148,24 @@ const styles = StyleSheet.create({
     color: '#656F77',
   },
   ContStatus1: {
-    backgroundColor: '#FFF50F',
-    paddingHorizontal: 8,
-    borderRadius: 5,
-    alignSelf: 'flex-start',
-  },
-  ContStatus2: {
-    backgroundColor: '#74D483',
-    paddingHorizontal: 8,
-    borderRadius: 5,
-    alignSelf: 'flex-start',
-  },
-  ContStatus3: {
-    backgroundColor: '#FF7885',
     paddingHorizontal: 8,
     borderRadius: 5,
     alignSelf: 'flex-start',
   },
   ContTextKet: {
     width: 250,
+  },
+  berhasilBcc: {
+    backgroundColor: '#74D483',
+    // color: '#027915',
+  },
+  gagalBcc: {
+    backgroundColor: '#FF7885',
+    // color: '#D40808',
+  },
+  waitBcc: {
+    backgroundColor: '#FFF50F',
+    // color: '#D2AE2C',
   },
 });
 

@@ -5,8 +5,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 //Import Material
 //Screen
-import HomeDemo from './Home';
-import LoginDemo from './Login';
+// import HomeDemo from './Home';
+import Rppt from './Login';
 //Image
 
 //Start Application
@@ -16,8 +16,8 @@ const DemoApp = ({navigation}) => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="LoginDemo" component={LoginDemo} />
-        <Stack.Screen name="HomeDemo" component={HomeDemo} />
+        <Stack.Screen name="Rppt" component={Rppt} />
+        {/* <Stack.Screen name="HomeDemo" component={HomeDemo} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

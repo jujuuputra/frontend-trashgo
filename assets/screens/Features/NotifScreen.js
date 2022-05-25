@@ -1,66 +1,58 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
+import {Text, View, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
 import HeaderNotifikasi from '../Header/HeaderNotifikasi';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 const NotifScreen = () => {
-  const [date, setDate] = useState({
-    tanggal: '24',
-    bulan: 'Februari',
-  });
+  const data = [
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      title: 'Pelaporan Sampah 24 Februari',
+      desc: 'Laporan Anda diterima.',
+    },
+    {
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      title: 'Pelaporan Sampah 27 Februari',
+      desc: 'Laporan Anda ditolak.',
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: 'Pelaporan Sampah 29 Februari',
+      desc: 'Terimakasih telah melaporkan tempat sampah yang sudah penuh.',
+    },
+  ];
   return (
     <View>
       <View>
         <HeaderNotifikasi />
       </View>
 
-      <View style={styles.ContPage}>
-        <View style={styles.ContBox}>
-          <View style={styles.ContIsiBox1}>
-            <View style={styles.ContStatus1}></View>
-            <Text style={styles.text2}>
-              Pelaporan Sampah {date.tanggal} {date.bulan}
-            </Text>
-            <View style={styles.ContTextKet}>
-              <Text numberOfLines={2} ellipsizeMode="tail" style={styles.text3}>
-                Terimakasih telah melaporkan tempat sampah yang sudah penuh.
-              </Text>
+      <FlatList
+        data={data}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => {
+          return (
+            <View style={styles.ContPage}>
+              <View style={styles.ContBox}>
+                <View style={styles.ContIsiBox1}>
+                  <View style={styles.ContStatus1}></View>
+                  <Text style={styles.text2}>{item.title}</Text>
+                  <View style={styles.ContTextKet}>
+                    <Text
+                      numberOfLines={2}
+                      ellipsizeMode="tail"
+                      style={styles.text3}>
+                      {item.desc}
+                    </Text>
+                  </View>
+                </View>
+                <TouchableOpacity style={styles.ContIsiBox2} onPress={() => {}}>
+                  <Icon name="arrow-forward-ios" size={25}></Icon>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-          <TouchableOpacity style={styles.ContIsiBox2} onPress={() => {}}>
-            <Icon name="arrow-forward-ios" size={25}></Icon>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.ContBox}>
-          <View style={styles.ContIsiBox1}>
-            <Text style={styles.text2}>
-              Pelaporan Sampah {date.tanggal} {date.bulan}
-            </Text>
-            <View style={styles.ContTextKet}>
-              <Text numberOfLines={2} ellipsizeMode="tail" style={styles.text3}>
-                Laporan Anda telah kami terima.
-              </Text>
-            </View>
-          </View>
-          <TouchableOpacity style={styles.ContIsiBox2} onPress={() => {}}>
-            <Icon name="arrow-forward-ios" size={25}></Icon>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.ContBox}>
-          <View style={styles.ContIsiBox1}>
-            <Text style={styles.text2}>
-              Pelaporan Sampah {date.tanggal} {date.bulan}
-            </Text>
-            <View style={styles.ContTextKet}>
-              <Text numberOfLines={2} ellipsizeMode="tail" style={styles.text3}>
-                Laporan Anda tidak diterima.
-              </Text>
-            </View>
-          </View>
-          <TouchableOpacity style={styles.ContIsiBox2} onPress={() => {}}>
-            <Icon name="arrow-forward-ios" size={25}></Icon>
-          </TouchableOpacity>
-        </View>
-      </View>
+          );
+        }}
+      />
     </View>
   );
 };

@@ -13,33 +13,30 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
 import {StackActions} from '@react-navigation/native';
-import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwtDecode from 'jwt-decode';
 //Screen
 import HeaderAkun from '../Header/HeaderAkun';
-const Profile = () => {
-  const navigation = useNavigation();
-
-  const [userInfo, setUserInfo] = useState();
-
-  const getData = async () => {
+const Profile = ({navigation}) => {
+  const [token, setToken] = useState('');
+  const _retrieveData = async () => {
     try {
-      const res = await axios.get('http://10.0.2.2:3000/users', {
-        params: {
-          namaUser: 'Jujuu',
-          emailUser: 'jujuu@email',
-          passwordUser: 'juju123',
-          nohpUser: '0852',
-          id: 1,
-        },
-      });
+      const value = AsyncStorage.getItem('sessionID');
+      if (value !== null) {
+        // We have data!!
+        setToken(value);
+      }
     } catch (error) {
-      alert(error.message);
+      // Error retrieving data
     }
   };
 
   useEffect(() => {
-    getData();
+    _retrieveData();
   }, []);
+
+  // const user = jwtDecode(token || null);
+  // const user = token ? jwtDecode(token) : null;
 
   return (
     <View style={styles.Cont}>
@@ -53,7 +50,7 @@ const Profile = () => {
       </View>
       <View style={styles.ContProf}>
         <View style={styles.PProfile}></View>
-        <Text style={styles.textNama}>Juju</Text>
+        <Text style={styles.textNama}>user.nama_user</Text>
         <View style={styles.garis}></View>
         <Text style={styles.textBio}>Direktur</Text>
         <View style={styles.ContLoc}>
@@ -64,14 +61,14 @@ const Profile = () => {
           <View style={styles.ContProf2}>
             <Text style={styles.text1}>ID</Text>
             <View>
-              <Text style={styles.text2}>123</Text>
+              <Text style={styles.text2}>user.Id_user</Text>
             </View>
           </View>
           <View style={styles.garis}></View>
           <View style={styles.ContProf2}>
             <Text style={styles.text1}>Username</Text>
             <View>
-              <Text style={styles.text2}>123</Text>
+              <Text style={styles.text2}>user.nama_user</Text>
             </View>
           </View>
           <View style={styles.garis}></View>

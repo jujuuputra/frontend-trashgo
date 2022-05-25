@@ -10,6 +10,7 @@ import {
   StatusBar,
   ToastAndroid,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Checkbox} from 'react-native-paper';
@@ -25,6 +26,8 @@ const SignUp = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [noHp, setNoHp] = useState('');
   const [checked, setChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const buttonDaftar = () => {
     if (namaUser && emailUser && password && noHp) {
       const data = {
@@ -33,17 +36,21 @@ const SignUp = ({navigation}) => {
         password: password,
         alamat: noHp,
       };
-      Axios.post('http://10.0.2.2:1234/api/register', data)
+      Axios.post('http://10.0.2.2:1234/register', data)
         .then(res => {
-          console.log('res', res.data);
+          console.log(res);
           setNamaUser('');
           setEmailUser('');
           setPassword('');
           setNoHp('');
+          Alert.alert('Registrasi Berhasil', res.data.message);
         })
         .catch(error => {
           console.log(error);
         });
+      setIsLoading({
+        isLoading: false,
+      });
     } else {
       Alert.alert('Warning', 'Silahkan isi dengan benar');
     }
@@ -101,12 +108,13 @@ const SignUp = ({navigation}) => {
       </View>
 
       <View style={styles.checkbox}>
-        <Checkbox
+        {/* <Checkbox
           status={checked ? 'checked' : 'unchecked'}
           onPress={() => {
             setChecked(!checked);
           }}
-        />
+          
+        /> */}
         <Text style={styles.textCheckBox}>
           Saya setuju dengan Syarat & Ketentuan serta Kebijakan Privasi
         </Text>

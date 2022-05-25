@@ -1,103 +1,86 @@
-import React, {useEffect, useState} from 'react';
-import Axios from 'axios';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  Alert,
-} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-const LoginDemo = ({navigation}) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [token, setToken] = useState('');
-  const onSubmit = async () => {
-    await AsyncStorage.setItem('token', username + Math.random());
-    Axios.post('https://reqres.in/api/login', {
-      email: username,
-      password: password,
-    })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    if (username && password) {
-      console.log('Nice');
-      navigation.navigate('HomeDemo');
-    } else {
-      Alert.alert('Warning', 'Incorrect username or password');
-    }
-  };
+// import React, {useState} from 'react';
+// import {
+//   Text,
+//   View,
+//   StyleSheet,
+//   Button,
+//   FlatList,
+//   TouchableOpacity,
+//   Image,
+// } from 'react-native';
+// import Icon from 'react-native-vector-icons/MaterialIcons';
 
-  const tokenlogin = async () => {
-    const valueToken = await AsyncStorage.getItem('token');
-    if (valueToken != null) {
-      navigation.navigate('HomeDemo');
-    } else {
-      Alert.alert('Warning', 'Please login first!');
-    }
-  };
-  return (
-    <View style={styles.container}>
-      <View>
-        <Text style={styles.judul}>Login Demo</Text>
-        <TextInput
-          style={styles.inputan}
-          placeholder="Usename"
-          value={username}
-          onChangeText={value => setUsername(value)}
-        />
-        <TextInput
-          style={styles.inputan}
-          placeholder="Password"
-          secureTextEntry={true}
-          value={password}
-          onChangeText={value => setPassword(value)}
-        />
-      </View>
-      <TouchableOpacity style={styles.button} onPress={onSubmit}>
-        <Text style={styles.textButton}>Login</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
+// const RpptKonfirm = function ({navigation}) {
+//   const [data, setData] = useState({
+//     nama: 'Shyfanaya Aulia',
+//     posisi: 'AI-HACKER',
+//     sksMaks: '10',
+//     sksTempuh: '8',
+//     sksSisa: '2',
+//     status: 'TELAH DISETUJUI ADMIN',
+//     catatan: 'silahkan download RPPT',
+//   });
+//   const course = [
+//     {
+//       id: 'ds',
+//       course: 'Data Science B (3 SKS)',
+//     },
+//     {
+//       id: 'ml',
+//       course: 'Machine Learning (2 SKS)',
+//     },
+//     {
+//       id: 'bd',
+//       course: 'Bisnis Digital (3 SKS)',
+//     },
+//   ];
+//   return (
+//     <View style={styles.container}>
+//       <View
+//         style={{
+//           flexDirection: 'row',
+//           paddingHorizontal: 15,
+//           paddingVertical: 10,
+//           borderBottomWidth: 0.5,
+//           borderBottomColor: '#a9a9a9',
+//           elevation: 2,
+//         }}>
+//         <TouchableOpacity onPress={() => {}}>
+//           <Icon name="arrow-back" size={25} color={'#000'} />
+//         </TouchableOpacity>
+//         <View style={{flex: 1, alignItems: 'center'}}>
+//           <Text
+//             style={{
+//               fontFamily: 'Poppins-Bold',
+//               fontSize: 18,
+//               color: '#000',
+//             }}>
+//             RPPT
+//           </Text>
+//         </View>
+//       </View>
+//       <View style={styles.containerPage}>
+//         <Image source={require('../assets/konfirmasi.png')} />
+//         <Text
+//           style={{color: 'blue', fontSize: 16, fontFamily: 'Poppins-SemiBold'}}>
+//           Menunggu Konfirmasi Admin
+//         </Text>
+//       </View>
+//     </View>
+//   );
+// };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  inputan: {
-    backgroundColor: '#d2d2d2',
-    width: 200,
-    height: 40,
-    paddingLeft: 10,
-    marginBottom: 10,
-  },
-  judul: {
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 25,
-    color: '#000',
-    margin: 25,
-  },
-  button: {
-    width: 150,
-    height: 40,
-    backgroundColor: '#116e11',
-    borderRadius: 5,
-    justifyContent: 'center',
-  },
-  textButton: {
-    color: '#000',
-    textAlign: 'center',
-    fontSize: 17,
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//   },
+//   containerPage: {
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     flex: 1,
+//     backgroundColor: '#fff',
+//   },
+// });
 
-export default LoginDemo;
+// export default RpptKonfirm;
