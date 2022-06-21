@@ -22,6 +22,9 @@ import NotifScreen from './Features/NotifScreen';
 import SplashScreen from './SplashScreen';
 import SettingScreen from './Features/SettingScreen';
 import EditProfile from './Features/EditProfile';
+import LaporanScreen from './Features/LaporanScreen';
+import DetailsLaporan from './Features/DetailsLaporan';
+import ScheduleScreen from './Features/ScheduleScreen';
 //Image
 
 //Start Application
@@ -51,6 +54,9 @@ const AllScreen = ({navigation}) => {
         <Stack.Screen name="ChangePassword" component={ChangePassword} />
         <Stack.Screen name="SettingScreen" component={SettingScreen} />
         <Stack.Screen name="EditProfile" component={EditProfile} />
+        <Stack.Screen name="LaporanScreen" component={LaporanScreen} />
+        <Stack.Screen name="DetailsLaporan" component={DetailsLaporan} />
+        <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

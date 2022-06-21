@@ -9,25 +9,24 @@ import {
   FlatList,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-//Screen
-import HeaderHistory from './Header/HeaderHistory';
+import HeaderLaporan from '../Header/HeaderLaporan';
 
-const HistoryScreen = ({navigation}) => {
+const LaporanScreen = ({navigation}) => {
   const data = [
     {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      id: '1',
       status: 'Selesai',
       title: 'Pelaporan Sampah 24 Februari',
       desc: 'Laporan Anda diterima.',
     },
     {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      id: '2',
       status: 'Gagal',
       title: 'Pelaporan Sampah 27 Februari',
       desc: 'Laporan Anda ditolak.',
     },
     {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      id: '3',
       status: 'Menunggu persetujuan',
       title: 'Pelaporan Sampah 29 Februari',
       desc: 'Terimakasih telah melaporkan tempat sampah yang sudah penuh.',
@@ -51,7 +50,7 @@ const HistoryScreen = ({navigation}) => {
   return (
     <View>
       <View>
-        <HeaderHistory />
+        <HeaderLaporan />
       </View>
 
       <FlatList
@@ -101,6 +100,13 @@ const HistoryScreen = ({navigation}) => {
                     </Text>
                   </View>
                 </View>
+                <TouchableOpacity
+                  style={styles.ContIsiBox2}
+                  onPress={() =>
+                    navigation.navigate('DetailsLaporan', {id: item.id})
+                  }>
+                  <Icon name="arrow-forward-ios" size={25}></Icon>
+                </TouchableOpacity>
               </View>
             </View>
           );
@@ -166,4 +172,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HistoryScreen;
+export default LaporanScreen;

@@ -27,6 +27,7 @@ const Home = ({navigation}) => {
     <View
       style={{
         flex: 1,
+        backgroundColor: '#fff',
       }}>
       <View>
         <StatusBar translucent backgroundColor="transparent" />
@@ -35,13 +36,13 @@ const Home = ({navigation}) => {
         <View style={styles.header}>
           <TouchableOpacity
             style={styles.iconbox}
-            onPress={() => navigation.navigate('NotifScreen')}>
+            onPress={() => navigation.navigate('LaporanScreen')}>
             <Icon name="delete-outline" size={40} color={'#105263'} />
             <Text style={styles.texticonbox}>Laporkan</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.iconbox}
-            onPress={() => navigation.navigate('Demo')}>
+            onPress={() => navigation.navigate('ScheduleScreen')}>
             <Icon name="calendar-today" size={40} color={'#105263'} />
             <Text style={styles.texticonbox}>Jadwal</Text>
           </TouchableOpacity>
@@ -180,7 +181,7 @@ const styles = StyleSheet.create({
     height: 65,
     width: 65,
     borderRadius: 10,
-    backgroundColor: '#d2d2d2d2',
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 10,

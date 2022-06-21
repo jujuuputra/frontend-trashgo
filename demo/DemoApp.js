@@ -25,3 +25,16 @@ const DemoApp = ({navigation}) => {
 
 // export default test;
 export default DemoApp;
+
+// useEffect(() => {
+//   setTimeout(() => {
+//     try {
+//       const _validationSession = () => {
+//         navigation.navigate('LoginAs');
+//       };
+//       _validationSession();
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }, 2500);
+// }, []);

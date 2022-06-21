@@ -31,20 +31,23 @@ const Stack = createNativeStackNavigator();
 const Login = ({navigation}) => {
   const [emailUser, setEmailUser] = useState('');
   const [passwordUser, setPasswordUser] = useState('');
+  const [userToken, setUserToken] = useState(null);
   const [handleError, setHandleError] = useState(false);
 
   function LoginHandle() {
     setHandleError(false);
-    Axios.post('http://10.0.2.2:1234/login', {
+    Axios.post('http://10.0.2.2:1234/auth/login', {
       email: emailUser,
       password: passwordUser,
     })
       .then(res => {
         console.log(res);
-        AsyncStorage.setItem('sessionID', res.data.token);
+        setUserToken(res.data.token);
+        AsyncStorage.setItem('sessionID', userToken);
         navigation.navigate('Tabs');
         setEmailUser('');
         setPasswordUser('');
+        console.log(userToken);
       })
       .catch(error => {
         console.log(error);

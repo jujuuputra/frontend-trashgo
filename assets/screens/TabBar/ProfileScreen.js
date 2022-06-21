@@ -19,24 +19,42 @@ import jwtDecode from 'jwt-decode';
 import HeaderAkun from '../Header/HeaderAkun';
 const Profile = ({navigation}) => {
   const [token, setToken] = useState('');
-  const _retrieveData = async () => {
-    try {
-      const value = AsyncStorage.getItem('sessionID');
-      if (value !== null) {
-        // We have data!!
-        setToken(value);
-      }
-    } catch (error) {
-      // Error retrieving data
-    }
-  };
 
   useEffect(() => {
+    const _retrieveData = async () => {
+      const jwt = AsyncStorage.getItem('sessionID');
+      if (jwt !== null) {
+        setToken(jwt);
+      }
+    };
     _retrieveData();
   }, []);
 
+  // const _retrieveData = async () => {
+  //   try {
+  //     const value = AsyncStorage.getItem('sessionID');
+  //     if (value !== null) {
+  //       // We have data!!
+  //       setToken(value);
+  //     }
+  //   } catch (error) {
+  //     // Error retrieving data
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   _retrieveData();
+  // }, []);
+
+  // try {
+  //   const data = decode(token);
+  //   // valid token format
+  // } catch (error) {
+  //   // invalid token format
+  // }
+  // const user = jwtDecode(token);
   // const user = jwtDecode(token || null);
-  // const user = token ? jwtDecode(token) : null;
+  // const user = token ? jwtDecode(token, {header: true}) : null;
 
   return (
     <View style={styles.Cont}>
@@ -52,44 +70,41 @@ const Profile = ({navigation}) => {
         <View style={styles.PProfile}></View>
         <Text style={styles.textNama}>user.nama_user</Text>
         <View style={styles.garis}></View>
-        <Text style={styles.textBio}>Direktur</Text>
-        <View style={styles.ContLoc}>
-          <Icon name="location-on" size={20} color="#000"></Icon>
-          <Text style={styles.textBio}>Jatiindah</Text>
-        </View>
+        <Text style={styles.textBio}>desc</Text>
+
         <View>
           <View style={styles.ContProf2}>
             <Text style={styles.text1}>ID</Text>
             <View>
-              <Text style={styles.text2}>user.Id_user</Text>
+              <Text style={styles.text2}>user.userid</Text>
             </View>
           </View>
           <View style={styles.garis}></View>
           <View style={styles.ContProf2}>
             <Text style={styles.text1}>Username</Text>
             <View>
-              <Text style={styles.text2}>user.nama_user</Text>
+              <Text style={styles.text2}>user.username</Text>
             </View>
           </View>
           <View style={styles.garis}></View>
           <View style={styles.ContProf2}>
             <Text style={styles.text1}>Email</Text>
             <View>
-              <Text style={styles.text2}>juju@email</Text>
+              <Text style={styles.text2}>user.email</Text>
             </View>
           </View>
           <View style={styles.garis}></View>
           <View style={styles.ContProf2}>
             <Text style={styles.text1}>Alamat</Text>
             <View>
-              <Text style={styles.text2}>Jatiindah</Text>
+              <Text style={styles.text2}>user.address</Text>
             </View>
           </View>
           <View style={styles.garis}></View>
           <View style={styles.ContProf2}>
             <Text style={styles.text1}>No.Telp</Text>
             <View>
-              <Text style={styles.text2}>0852</Text>
+              <Text style={styles.text2}>user.telp</Text>
             </View>
           </View>
           <View style={styles.garis}></View>

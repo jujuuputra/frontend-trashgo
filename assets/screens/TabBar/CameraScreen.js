@@ -8,11 +8,12 @@ import {
   Image,
   PermissionsAndroid,
   ToastAndroid,
+  TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/SimpleLineIcons';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 //Screen
 import HeaderCamera from '../Header/HeaderCamera';
 import bgTrashGO from '../../img/trashgoicon.svg';
@@ -20,6 +21,7 @@ import bgTrashGO from '../../img/trashgoicon.svg';
 const Camera = () => {
   const [imageCamera, setImageCamera] = useState(null);
   const [accessCamera, setAccessCamera] = useState(null);
+  const [keterangan, setKeterangan] = useState('');
 
   const requestCameraPermission = async () => {
     try {
@@ -68,11 +70,13 @@ const Camera = () => {
 
   const buttonKirim = () => {
     setImageCamera(null);
+    setKeterangan('');
+
     ToastAndroid.show('Laporan telah terkirim', ToastAndroid.SHORT);
   };
 
   return (
-    <View style={styles.Page}>
+    <KeyboardAwareScrollView style={styles.Page}>
       <HeaderCamera></HeaderCamera>
       <View style={styles.headerBelow}>
         <View style={styles.ContrashGO}>
@@ -81,19 +85,23 @@ const Camera = () => {
         </View>
       </View>
       <View style={styles.ConText}>
-        <View>
-          <Text style={styles.textLaporkan}>
-            Laporkan dengan tahap-tahap berikut ini:
-          </Text>
-        </View>
-        <View>
-          <Text style={styles.textIsiLaporkan}>
-            1. Foto tempat pembuangan sampah secara jelas
-          </Text>
-          <Text style={styles.textIsiLaporkan}>
-            2. Anda telah selesai melaporkan.
-          </Text>
-        </View>
+        {imageCamera != null ? null : (
+          <View>
+            <View>
+              <Text style={styles.textLaporkan}>
+                Laporkan dengan tahap-tahap berikut ini:
+              </Text>
+            </View>
+            <View>
+              <Text style={styles.textIsiLaporkan}>
+                1. Foto tempat pembuangan sampah secara jelas
+              </Text>
+              <Text style={styles.textIsiLaporkan}>
+                2. Anda telah selesai melaporkan.
+              </Text>
+            </View>
+          </View>
+        )}
         <View style={styles.ContCam}>
           {imageCamera != null ? (
             <Image
@@ -131,13 +139,24 @@ const Camera = () => {
           )}
         </View>
       </View>
-
+      {imageCamera != null ? (
+        <View style={{marginHorizontal: 20}}>
+          <Text>Keterangan:</Text>
+          <TextInput
+            value={keterangan}
+            style={{borderWidth: 1}}
+            multiline={true}
+            numberOfLines={3}
+            placeholder={'Tulis keterangan'}
+            onChangeText={text => setKeterangan(text)}></TextInput>
+        </View>
+      ) : null}
       {imageCamera != null ? (
         <TouchableOpacity style={styles.ContKirim3} onPress={buttonKirim}>
           <Text style={styles.textKirim2}>Kirim Laporan</Text>
         </TouchableOpacity>
       ) : null}
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -165,7 +184,7 @@ const styles = StyleSheet.create({
   },
   ConText: {
     alignItems: 'center',
-    paddingTop: 20,
+    paddingTop: 10,
   },
   textLaporkan: {
     fontFamily: 'Poppins-SemiBold',
@@ -187,7 +206,7 @@ const styles = StyleSheet.create({
   },
   ContCam: {
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 10,
   },
   ContKirim: {
     backgroundColor: '#105263',
@@ -218,10 +237,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    position: 'absolute',
-    bottom: 100,
-    right: 30,
-    left: 30,
+    alignSelf: 'center',
+    marginTop: 15,
+    //   position: 'absolute',
+    //   bottom: 100,
+    //   right: 30,
+    //   left: 30,
   },
   textKirim2: {
     color: '#105263',

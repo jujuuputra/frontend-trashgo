@@ -24,25 +24,31 @@ const SignUp = ({navigation}) => {
   const [namaUser, setNamaUser] = useState('');
   const [emailUser, setEmailUser] = useState('');
   const [password, setPassword] = useState('');
-  const [noHp, setNoHp] = useState('');
+  const [alamat, setAlamat] = useState('');
+  const [kelamin, setKelamin] = useState('');
+  const [tempatLahir, setTempatLahir] = useState('');
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const buttonDaftar = () => {
-    if (namaUser && emailUser && password && noHp) {
+    if (namaUser && emailUser && password && alamat && tempatLahir && kelamin) {
       const data = {
         nama_user: namaUser,
         email: emailUser,
         password: password,
-        alamat: noHp,
+        alamat: alamat,
+        tempat_lahir: tempatLahir,
+        kelamin: kelamin,
       };
-      Axios.post('http://10.0.2.2:1234/register', data)
+      Axios.post('http://10.0.2.2:1234/auth/register', data)
         .then(res => {
           console.log(res);
           setNamaUser('');
           setEmailUser('');
           setPassword('');
-          setNoHp('');
+          setAlamat('');
+          setKelamin('');
+          setTempatLahir('');
           Alert.alert('Registrasi Berhasil', res.data.message);
         })
         .catch(error => {
@@ -98,12 +104,30 @@ const SignUp = ({navigation}) => {
             secureTextEntry={true}></TextInput>
         </View>
         <View style={styles.formInput}>
-          <Icon name="smartphone" size={25} color={'#105263'}></Icon>
+          <Icon name="location-on" size={25} color={'#105263'}></Icon>
           <TextInput
-            placeholder="No.Handphone"
+            placeholder="Tempat lahir"
             style={styles.textInput}
-            value={noHp}
-            onChangeText={noHp => setNoHp(noHp)}></TextInput>
+            value={tempatLahir}
+            onChangeText={tempatLahir =>
+              setTempatLahir(tempatLahir)
+            }></TextInput>
+        </View>
+        <View style={styles.formInput}>
+          <Icon name="wc" size={25} color={'#105263'}></Icon>
+          <TextInput
+            placeholder="Jenis Kelamin"
+            style={styles.textInput}
+            value={kelamin}
+            onChangeText={kelamin => setKelamin(kelamin)}></TextInput>
+        </View>
+        <View style={styles.formInput}>
+          <Icon name="location-on" size={25} color={'#105263'}></Icon>
+          <TextInput
+            placeholder="Alamat"
+            style={styles.textInput}
+            value={alamat}
+            onChangeText={alamat => setAlamat(alamat)}></TextInput>
         </View>
       </View>
 
