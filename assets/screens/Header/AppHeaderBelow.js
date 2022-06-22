@@ -25,17 +25,17 @@ const AppHeaderBelow = ({navigation}) => {
       }}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.iconbox}>
-          <Icon name="delete-outline" size={40} color={'#105263'} />
+          <Icon name="delete-outline" size={40} color={'#0f9562'} />
           <Text style={styles.texticonbox}>Laporkan</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconbox}>
-          <Icon name="calendar-today" size={40} color={'#105263'} />
+          <Icon name="calendar-today" size={40} color={'#0f9562'} />
           <Text style={styles.texticonbox}>Jadwal</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.iconbox}
           onPress={() => navigation.navigate('HistoryScreen')}>
-          <Icon name="history" size={40} color={'#105263'} />
+          <Icon name="history" size={40} color={'#0f9562'} />
           <Text style={styles.texticonbox}>Riwayat</Text>
         </TouchableOpacity>
       </View>
@@ -46,7 +46,7 @@ const AppHeaderBelow = ({navigation}) => {
 const styles = StyleSheet.create({
   header: {
     height: 100,
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   texticonbox: {
     fontFamily: 'Poppins-SemiBold',
     fontSize: 10,
-    color: '#105263',
+    color: '#0f9562',
   },
 });
 export default AppHeaderBelow;

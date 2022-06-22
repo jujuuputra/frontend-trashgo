@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   },
   textMasuk: {
     fontFamily: 'FutuBd',
-    color: '#105263',
+    color: '#0f9562',
   },
   textMasukDengan: {
     color: '#ffffff',
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
   },
   SAV: {
     flex: 1,
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
   },
   containerLogo: {
     paddingTop: 40,

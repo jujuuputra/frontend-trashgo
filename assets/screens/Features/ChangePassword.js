@@ -61,7 +61,7 @@ const ChangePassword = ({navigation}) => {
 
 const styles = StyleSheet.create({
   SAV: {
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
     flex: 1,
   },
   containerPage: {
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   Appbar: {
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
     marginTop: 20,
   },
   containerTrashgo: {
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonSimpan: {
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
     paddingHorizontal: 15,
     marginTop: 50,
     borderRadius: 8,

@@ -58,7 +58,7 @@ const SettingScreen = () => {
             value={isEnabled}
             onValueChange={switchToggle}
             thumbColor={isEnabled ? '#fff' : '#fff'}
-            trackColor={{false: '#a5a5a5', true: '#105263'}}
+            trackColor={{false: '#a5a5a5', true: '#0f9562'}}
           />
         </View>
         <View style={styles.boxPilihan}>
@@ -67,7 +67,7 @@ const SettingScreen = () => {
             value={isEnabled2}
             onValueChange={switchToggle2}
             thumbColor={isEnabled2 ? '#fff' : '#fff'}
-            trackColor={{false: '#a5a5a5', true: '#105263'}}
+            trackColor={{false: '#a5a5a5', true: '#0f9562'}}
           />
         </View>
 
@@ -105,14 +105,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
     fontSize: 18,
     marginTop: 20,
-    color: '#105263',
+    color: '#0f9562',
   },
   buttonSignOut: {
     justifyContent: 'center',
     alignSelf: 'center',
     alignItems: 'center',
     borderWidth: 1.5,
-    borderColor: '#105263',
+    borderColor: '#0f9562',
     height: 40,
     width: 120,
     marginTop: 30,
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   textSignOut: {
     fontFamily: 'Poppins-SemiBold',
     fontSize: 16,
-    color: '#105263',
+    color: '#0f9562',
   },
 });
 export default SettingScreen;

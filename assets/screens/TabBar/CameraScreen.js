@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerBelow: {
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
     height: 80,
   },
   ContrashGO: {
@@ -188,18 +188,18 @@ const styles = StyleSheet.create({
   },
   textLaporkan: {
     fontFamily: 'Poppins-SemiBold',
-    color: '#105263',
+    color: '#0f9562',
     textAlign: 'center',
   },
   textIsiLaporkan: {
     fontFamily: 'Poppins-Regular',
-    color: '#105263',
+    color: '#0f9562',
     fontSize: 13,
   },
   camera: {
     height: 120,
     width: 120,
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   ContKirim: {
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
     height: 40,
     width: 150,
     flexDirection: 'row',
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     height: 40,
     width: 300,
-    borderColor: '#105263',
+    borderColor: '#0f9562',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
     //   left: 30,
   },
   textKirim2: {
-    color: '#105263',
+    color: '#0f9562',
     fontFamily: 'Poppins-SemiBold',
   },
 });

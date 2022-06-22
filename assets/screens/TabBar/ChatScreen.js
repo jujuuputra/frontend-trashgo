@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   IconBox: {
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
     borderRadius: 40,
     height: 50,
     width: 50,
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   IconBoxChat: {
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
     borderRadius: 50,
     height: 50,
     width: 50,

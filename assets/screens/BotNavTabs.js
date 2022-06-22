@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     tabBarHideOnKeyboard: true,
     // tabBarIconStyle: {display: 'none'},
     tabBarStyle: {
-      backgroundColor: '#105263',
+      backgroundColor: '#0f9562',
       borderRadius: 10,
       height: 80,
       elevation: 3,

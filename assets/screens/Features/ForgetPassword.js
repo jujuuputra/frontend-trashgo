@@ -45,7 +45,7 @@ const ForgetPassword = ({navigation}) => {
 
 const styles = StyleSheet.create({
   SAV: {
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
     flex: 1,
   },
   containerPage: {
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   Appbar: {
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
     marginTop: 20,
   },
   containerTrashgo: {
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
   textSimpan: {
     fontFamily: 'FutuBd',
-    color: '#105263',
+    color: '#0f9562',
     fontSize: 16,
   },
 });

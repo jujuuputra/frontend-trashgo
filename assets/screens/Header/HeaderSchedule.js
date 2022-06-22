@@ -31,7 +31,7 @@ const HeaderJadwal = () => {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
     height: 90,
     flexDirection: 'row',
     paddingTop: 30,

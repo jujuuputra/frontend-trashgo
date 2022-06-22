@@ -26,7 +26,7 @@ export default ScheduleScreen;
 const styles = StyleSheet.create({
   title: {
     fontFamily: 'Poppins-SemiBold',
-    color: '#105263',
+    color: '#0f9562',
     textAlign: 'center',
     marginTop: 20,
   },

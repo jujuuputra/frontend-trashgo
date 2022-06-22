@@ -29,7 +29,7 @@ const HeaderFPW = () => {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
     height: 80,
     flexDirection: 'row',
     paddingTop: 40,

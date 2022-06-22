@@ -79,7 +79,7 @@ const SignUp = ({navigation}) => {
 
       <View style={styles.containerInput}>
         <View style={styles.formInput}>
-          <Icon name="person" size={25} color={'#105263'}></Icon>
+          <Icon name="person" size={25} color={'#0f9562'}></Icon>
           <TextInput
             placeholder="Nama"
             style={styles.textInput}
@@ -87,7 +87,7 @@ const SignUp = ({navigation}) => {
             onChangeText={namaUser => setNamaUser(namaUser)}></TextInput>
         </View>
         <View style={styles.formInput}>
-          <Icon name="alternate-email" size={25} color={'#105263'}></Icon>
+          <Icon name="alternate-email" size={25} color={'#0f9562'}></Icon>
           <TextInput
             placeholder="Email"
             style={styles.textInput}
@@ -95,7 +95,7 @@ const SignUp = ({navigation}) => {
             onChangeText={emailUser => setEmailUser(emailUser)}></TextInput>
         </View>
         <View style={styles.formInput}>
-          <Icon name="lock" size={25} color={'#105263'}></Icon>
+          <Icon name="lock" size={25} color={'#0f9562'}></Icon>
           <TextInput
             placeholder="Kata Sandi"
             style={styles.textInput}
@@ -104,7 +104,7 @@ const SignUp = ({navigation}) => {
             secureTextEntry={true}></TextInput>
         </View>
         <View style={styles.formInput}>
-          <Icon name="location-on" size={25} color={'#105263'}></Icon>
+          <Icon name="location-on" size={25} color={'#0f9562'}></Icon>
           <TextInput
             placeholder="Tempat lahir"
             style={styles.textInput}
@@ -114,7 +114,7 @@ const SignUp = ({navigation}) => {
             }></TextInput>
         </View>
         <View style={styles.formInput}>
-          <Icon name="wc" size={25} color={'#105263'}></Icon>
+          <Icon name="wc" size={25} color={'#0f9562'}></Icon>
           <TextInput
             placeholder="Jenis Kelamin"
             style={styles.textInput}
@@ -122,7 +122,7 @@ const SignUp = ({navigation}) => {
             onChangeText={kelamin => setKelamin(kelamin)}></TextInput>
         </View>
         <View style={styles.formInput}>
-          <Icon name="location-on" size={25} color={'#105263'}></Icon>
+          <Icon name="location-on" size={25} color={'#0f9562'}></Icon>
           <TextInput
             placeholder="Alamat"
             style={styles.textInput}
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
   },
   SAV: {
     flex: 1,
-    backgroundColor: '#105263',
+    backgroundColor: '#0f9562',
   },
 });
 export default SignUp;

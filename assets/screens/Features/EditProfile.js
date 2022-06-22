@@ -52,7 +52,7 @@ const EditProfile = () => {
             style={{
               padding: 10,
               borderWidth: 1,
-              borderColor: '#105263',
+              borderColor: '#0f9562',
               marginHorizontal: 50,
               borderRadius: 5,
               width: 80,
@@ -63,7 +63,7 @@ const EditProfile = () => {
             style={{
               padding: 10,
               borderWidth: 1,
-              borderColor: '#105263',
+              borderColor: '#0f9562',
               marginHorizontal: 50,
               borderRadius: 5,
               width: 80,
@@ -105,14 +105,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
     fontSize: 18,
     marginTop: 20,
-    color: '#105263',
+    color: '#0f9562',
   },
   buttonSignOut: {
     justifyContent: 'center',
     alignSelf: 'center',
     alignItems: 'center',
     borderWidth: 1.5,
-    borderColor: '#105263',
+    borderColor: '#0f9562',
     height: 40,
     width: 120,
     marginTop: 30,
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   textSignOut: {
     fontFamily: 'Poppins-SemiBold',
     fontSize: 16,
-    color: '#105263',
+    color: '#0f9562',
   },
 });
 export default EditProfile;
